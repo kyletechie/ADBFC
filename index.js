@@ -41,10 +41,11 @@ function run(cmd, opts = { stdio: "inherit", shell: true }) {
   }
 }
 
-function adbConnect(port, pairPort, pairCode, ipv4) {
+async function adbConnect(port, pairPort, pairCode, ipv4) {
   process.stdout.write(`${INFO_COLOR}[INFO] ${SUCCESS_COLOR}Starting ADB Server...\n`);
   if (killServer){
     run("adb kill-server", { stdio: "ignore" });
+    await delay(3000);
   }
   run("adb start-server");
 
@@ -61,7 +62,6 @@ function adbConnect(port, pairPort, pairCode, ipv4) {
     console.log(`${INFO_COLOR}[WARNING] ${SUCCESS_COLOR}If multiple devices are connected, setting "killServer" to 1 may disconnect all devices.`);
     console.log(`${INFO_COLOR}[INFO] ${SUCCESS_COLOR}To avoid this, simply rerun the script and get a new port, pairPort, and pairCode for the target device. :D`);
     exit(1);
-    //adbConnect(port, pairPort, pairCode, ipv4);
   }
 
   console.log(`${INFO_COLOR}[SUCCESS] ${SUCCESS_COLOR}Successfully Connected to ${ipv4}:${port}.`);
@@ -135,7 +135,7 @@ async function main() {
       prefix: ""
     });
 
-    adbConnect(port, pairPort, pairCode, targetDevice);
+    await adbConnect(port, pairPort, pairCode, targetDevice);
   }
   catch (e) {
     console.log(`${ERROR_COLOR}[ERROR] ${SUCCESS_COLOR}${e.message}`);
