@@ -54,7 +54,7 @@ function antiTurnOff(){
     screenBlockList.forEach((blockList) => {
       if (currentScreen.includes(blockList)) {
         run(`adb shell input keyevent HOME`);
-        console.log(`${INFO_COLOR}${now} [INFO] Blocking ${blockList}.`);
+        console.log(`${INFO_COLOR}${now} [INFO] ${SUCCESS_COLOR}Blocking ${blockList}.`);
       }
     });
   }
