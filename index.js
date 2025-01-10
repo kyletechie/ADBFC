@@ -34,6 +34,14 @@ let ifconfigOutput = execSync("ifconfig", { stdio: "pipe", shell: true }).toStri
 
 const delay = (ms) => {return new Promise(res => setTimeout(res, ms))};
 
+console.log(`${INFO_COLOR}[INFO] ${SUCCESS_COLOR}Starting ADB Server...`);
+
+if (killServer){
+  run("adb kill-server", { stdio: "ignore" });
+  await delay(3000);
+}
+run("adb start-server");
+
 function run(cmd, opts = { stdio: "inherit", shell: true }) {
   try {
     const output = execSync(cmd, opts);
@@ -63,13 +71,6 @@ function antiTurnOff(){
 }
 
 async function adbConnect(port, pairPort, pairCode, ipv4) {
-  process.stdout.write(`${INFO_COLOR}[INFO] ${SUCCESS_COLOR}Starting ADB Server...\n`);
-  if (killServer){
-    run("adb kill-server", { stdio: "ignore" });
-    await delay(3000);
-  }
-  run("adb start-server");
-
   console.log(`${PAIRING_COLOR}[PAIRING] ${SUCCESS_COLOR}Pairing > ${ipv4}:${pairPort} with Pairing Code: ${pairCode}`);
   run(`adb pair ${ipv4}:${pairPort} ${pairCode}`, { stdio: "ignore" });
   console.log(`${PAIRING_COLOR}[PAIRING] ${SUCCESS_COLOR}Device Successfully Paired`);
