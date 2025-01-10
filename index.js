@@ -32,6 +32,8 @@ Arguments:
 
 let ifconfigOutput = execSync("ifconfig", { stdio: "pipe", shell: true }).toString();
 
+const delay = (ms) => {return new Promise(res => setTimeout(res, ms))};
+
 function run(cmd, opts = { stdio: "inherit", shell: true }) {
   try {
     const output = execSync(cmd, opts);
