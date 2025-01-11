@@ -158,7 +158,7 @@ async function main() {
     });
 
     await adbConnect(port, pairPort, pairCode, targetDevice);
-    if (antiturnoff === "1"){
+    if (antiturnoff){
       antiTurnOff();
     }
   }
