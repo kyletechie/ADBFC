@@ -106,9 +106,8 @@ function getWlan0IPv4() {
         }
       }
     }
-  } else {
-    throw new Error("Unable to Find Wlan0 Interface.");
   }
+  throw new Error("Unable to Find Wlan0 Interface.");
 }
 
 function getIPv4Devices() {
