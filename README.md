@@ -12,7 +12,7 @@ Ensure you have the following installed:
 
 ## Installation
 ```bash
-git clone https://github.com/Kairu-bit/ADBFC &&
+git clone https://github.com/kyletechie/ADBFC &&
 cd ADBFC &&
 npm install &&
 npm start
